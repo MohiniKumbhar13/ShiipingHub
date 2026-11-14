@@ -1,0 +1,31 @@
+/* ShippingHub.com custom styles */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Used by modal and toast notification elements. */
+.animate-fade-in {
+    animation: shippinghub-fade-in 220ms ease-out both;
+}
+
+@keyframes shippinghub-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .animate-fade-in {
+        animation: none;
+    }
+}

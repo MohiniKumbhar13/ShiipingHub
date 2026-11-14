@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShippingHub.com | Simple Import &amp; Export Trade Portal</title>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#163A5F',
+                            900: '#0F2942',
+                            950: '#091A2B',
+                        },
+                        trade: {
+                            50: '#FFF5ED',
+                            100: '#FFE8D6',
+                            500: '#FF6A00',
+                            600: '#E55C00',
+                        },
+                        surface: '#F6F8FB',
+                    }
+                }
+            }
+        }
+    </script>
+    
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased selection:bg-trade-500 selection:text-white">
+
+    <!-- ==================== 1. TOP UTILITY BAR ==================== -->
+    <div class="bg-navy-950 text-slate-200 text-xs border-b border-navy-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="tel:+917620106920" class="inline-flex items-center gap-1.5 font-semibold text-white hover:text-trade-500 transition">
+                    <i class="fa-solid fa-phone text-trade-500"></i>
+                    <span>Direct Owner Desk: +91 7620106920</span>
+                </a>
+                <span class="hidden md:inline-flex items-center gap-1.5 text-emerald-400">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Beginner-Friendly Export &amp; Import Assistance</span>
+                </span>
+            </div>
+
+            <div class="flex items-center gap-3 sm:gap-5"><button onclick="openInquiryModal('Custom Product Requirement', 'All Categories')" class="bg-trade-500 hover:bg-trade-600 text-white font-semibold px-3 py-1 rounded text-xs transition cursor-pointer">
+                    Post Your Requirement
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 2. MAIN HEADER & NAVIGATION ==================== -->
+    <header class="bg-white sticky top-0 z-40 shadow-xs border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3.5">
+                
+                <!-- Brand Logo (Ganpati SVG + ShippingHub.com) & Mobile Quick Call -->
+                <div class="flex items-center justify-between">
+                    <a href="#home" class="flex items-center gap-3 group">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 border border-amber-400/60 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform shrink-0">
+                            <!-- Auspicious Lord Ganesha (Ganpati) Vector Emblem -->
+                            <svg viewBox="0 0 64 64" class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ShippingHub Ganpati Emblem">
+                                <defs>
+                                    <linearGradient id="ganpatiGoldHeader" x1="12" y1="8" x2="52" y2="56" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#FDE047"/>
+                                        <stop offset="50%" stop-color="#FF8A00"/>
+                                        <stop offset="100%" stop-color="#EA580C"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="32" cy="32" r="28" stroke="url(#ganpatiGoldHeader)" stroke-width="1.5" stroke-dasharray="2.5 2.5" opacity="0.7"/>
+                                <path d="M32 6L35 10.5H29L32 6Z" fill="#FDE047"/>
+                                <path d="M25 14.5C25 12.2 28 11 32 11C36 11 39 12.2 39 14.5H25Z" fill="url(#ganpatiGoldHeader)"/>
+                                <path d="M22.5 18.5C22.5 16.3 26.5 15.2 32 15.2C37.5 15.2 41.5 16.3 41.5 18.5H22.5Z" fill="url(#ganpatiGoldHeader)"/>
+                                <path d="M21 21C14.5 20.5 11.5 25.5 13 31.5C14.2 36.2 18.2 37.5 21.5 35.5" stroke="url(#ganpatiGoldHeader)" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M43 21C49.5 20.5 52.5 25.5 51 31.5C49.8 36.2 45.8 37.5 42.5 35.5" stroke="url(#ganpatiGoldHeader)" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M23 21.5C26 19.5 38 19.5 41 21.5" stroke="url(#ganpatiGoldHeader)" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M30.2 21.5V25.5C30.2 26.5 33.8 26.5 33.8 25.5V21.5" stroke="#FDE047" stroke-width="1.5" stroke-linecap="round"/>
+                                <circle cx="32" cy="24" r="1.2" fill="#EF4444"/>
+                                <path d="M25.5 27.5C26.8 26.4 28.5 26.4 29.5 27.5" stroke="#FDE047" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M34.5 27.5C35.5 26.4 37.2 26.4 38.5 27.5" stroke="#FDE047" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M32 28.5C32 35.5 31.5 42.5 26.5 46C23.5 48.2 19.5 47 19.2 43.8C19 41.5 21.2 40.2 23 41.2" stroke="url(#ganpatiGoldHeader)" stroke-width="3.6" stroke-linecap="round"/>
+                                <path d="M26 34.5C24.5 35.5 23.5 35.5 22.8 34.8" stroke="#FEF08A" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M37.5 34.5C39.8 36.2 41.8 36 42.8 34.2" stroke="#FEF08A" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M22 53C26 51 38 51 42 53C38 55.5 26 55.5 22 53Z" fill="url(#ganpatiGoldHeader)" opacity="0.85"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <span class="text-2xl font-extrabold tracking-tight text-navy-900">ShippingHub</span>
+                                <span class="text-2xl font-extrabold tracking-tight text-trade-500">.com</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 font-medium -mt-0.5">Simple Import &amp; Export Business</p>
+                        </div>
+                    </a>
+
+                    <!-- Mobile Call & WhatsApp CTAs -->
+                    <div class="flex lg:hidden items-center gap-2">
+                        <a href="tel:+917620106920" class="px-3 py-2 bg-navy-900 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>Call</span>
+                        </a>
+                        <a href="https://wa.me/917620106920?text=Hello%20ShippingHub.com,%20I%20want%20to%20inquire%20about%20import/export%20products." target="_blank" rel="noopener" class="px-3 py-2 bg-emerald-600 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Straightforward Product Search Bar -->
+                <div class="flex-1 max-w-xl">
+                    <div class="flex rounded-xl border-2 border-trade-500 bg-white overflow-hidden shadow-xs">
+                        <input 
+                            type="text" 
+                            id="productSearchInput" 
+                            onkeyup="handleSearch()"
+                            placeholder="Search Spices, Rice, Garments, Handicrafts, Boxes..." 
+                            class="w-full px-4 py-2 text-sm text-slate-800 placeholder-slate-400 focus:outline-none"
+                        >
+                        <button onclick="handleSearch(true)" class="bg-trade-500 hover:bg-trade-600 text-white font-semibold px-5 py-2 text-sm flex items-center gap-2 transition cursor-pointer shrink-0">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Search</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Desktop Call / WhatsApp CTA -->
+                <div class="hidden lg:flex items-center gap-2.5 shrink-0">
+                    <a href="tel:+917620106920" class="px-4 py-2.5 rounded-xl border border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white text-xs font-bold transition flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-trade-500"></i>
+                        <span>+91 7620106920</span>
+                    </a>
+                    <a href="https://wa.me/917620106920?text=Hello%20ShippingHub.com,%20I%20am%20interested%20in%20import/export%20sourcing." target="_blank" rel="noopener" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>WhatsApp Chat</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clean Navigation Links -->
+        <nav class="bg-navy-900 text-white border-t border-navy-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-11">
+                <div class="flex items-center space-x-2 sm:space-x-6 overflow-x-auto no-scrollbar text-xs sm:text-sm font-medium">
+                    <a href="#home" class="hover:text-trade-500 transition whitespace-nowrap py-1">Home</a>
+                    <a href="#products" class="hover:text-trade-500 transition whitespace-nowrap py-1">Products</a>
+                    <a href="#send-inquiry" class="hover:text-trade-500 transition whitespace-nowrap py-1">Send Inquiry</a>
+                    <a href="#how-it-works" class="hover:text-trade-500 transition whitespace-nowrap py-1">How It Works</a>
+                    <a href="#contact" class="hover:text-trade-500 transition whitespace-nowrap py-1">Contact Us</a>
+                </div>
+                <span class="hidden md:inline text-xs text-slate-300">
+                    Sample Orders &amp; Low MOQ Welcomed
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==================== 3. HERO BANNER & BEGINNER QUICK INQUIRY ==================== -->
+    <section id="home" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            
+            <!-- Left Welcoming Banner (7 cols) -->
+            <div class="lg:col-span-7 rounded-2xl bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 text-white p-6 sm:p-9 flex flex-col justify-between shadow-md relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-trade-500/20 text-trade-500 border border-trade-500/30 text-xs font-bold mb-4">
+                        <i class="fa-solid fa-handshake"></i> Trusted Import &amp; Export Partner
+                    </span>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold leading-tight tracking-tight mb-4">
+                        Start Your Import &amp; Export Sourcing With <span class="text-trade-500">ShippingHub.com</span>
+                    </h1>
+                    <p class="text-sm sm:text-base text-slate-200 leading-relaxed mb-6 max-w-xl">
+                        Whether you are placing your very first wholesale order or expanding your business overseas, we make buying and exporting simple—with low minimum orders, sample support, and transparent pricing.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#products" class="px-5 py-3 bg-trade-500 hover:bg-trade-600 text-white text-sm font-bold rounded-xl shadow-md transition inline-flex items-center gap-2">
+                            <span>Browse Products</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="https://wa.me/917620106920?text=Hello%20ShippingHub.com,%20I%20would%20like%20help%20starting%20an%20import/export%20order." target="_blank" rel="noopener" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition inline-flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                            <span>Chat on WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Direct Owner Contact Strip inside Hero -->
+                <div class="relative z-10 mt-8 pt-5 border-t border-white/15 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                        <span>Direct Assistance Available: <a href="tel:+917620106920" class="text-white font-bold underline hover:text-trade-500">+91 7620106920</a></span>
+                    </div>
+                    <span>Fast Quotes • Sample Orders • Easy Delivery</span>
+                </div>
+            </div>
+
+            <!-- Right Beginner-Friendly Quick Requirement Form (5 cols) -->
+            <div id="send-inquiry" class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col justify-between">
+                <div>
+                    <div class="mb-4">
+                        <span class="text-xs font-bold uppercase tracking-wider text-trade-600">Free &amp; Fast Quote</span>
+                        <h2 class="text-xl font-extrabold text-navy-900 mt-0.5">Tell Us What You Need</h2>
+                        <p class="text-xs text-slate-500 mt-1">Fill out 4 simple details and receive best prices directly from ShippingHub.com.</p>
+                    </div>
+
+                    <form id="heroInquiryForm" onsubmit="handleHeroFormSubmit(event)" class="space-y-3.5">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Product Name *</label>
+                            <input type="text" id="heroProduct" required placeholder="e.g., Basmati Rice, Cotton T-Shirts, Brass Decor" class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-trade-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Quantity Needed *</label>
+                            <input type="text" id="heroQuantity" required placeholder="e.g., 500 kg, 200 pieces, or 1 sample box" class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-trade-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Destination Country / City *</label>
+                            <input type="text" id="heroDestination" required placeholder="e.g., Mumbai, Dubai, London, New York" class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-trade-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Your Phone / WhatsApp or Email *</label>
+                            <input type="text" id="heroContact" required placeholder="e.g., +91 98XXXXXXXX or name@email.com" class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-trade-500">
+                        </div>
+
+                        <button type="submit" class="w-full py-3 bg-trade-500 hover:bg-trade-600 text-white font-bold text-sm rounded-xl shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Get Best Price Quote</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
+                    Prefer talking directly? Call <a href="tel:+917620106920" class="font-bold text-navy-900 hover:text-trade-600">+91 7620106920</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 4. BEGINNER-FRIENDLY PRODUCT CATALOG ==================== -->
+    <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 sm:p-7">
+            
+            <!-- Catalog Header & Category Filter Pills -->
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-200">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-navy-900">Import &amp; Export Product Catalog</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Select a category below or click <strong>"Get Best Price"</strong> on any item to inquire.</p>
+                </div>
+
+                <!-- Interactive Category Pills -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                    <button onclick="filterCategory('All')" data-cat="All" class="cat-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-navy-900 text-white transition whitespace-nowrap cursor-pointer">
+                        All
+                    </button>
+                    <button onclick="filterCategory('Agro & Spices')" data-cat="Agro & Spices" class="cat-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition whitespace-nowrap cursor-pointer">
+                        Agro &amp; Spices
+                    </button>
+                    <button onclick="filterCategory('Textiles & Garments')" data-cat="Textiles & Garments" class="cat-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition whitespace-nowrap cursor-pointer">
+                        Textiles &amp; Garments
+                    </button>
+                    <button onclick="filterCategory('Handicrafts & Decor')" data-cat="Handicrafts & Decor" class="cat-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition whitespace-nowrap cursor-pointer">
+                        Handicrafts &amp; Decor
+                    </button>
+                    <button onclick="filterCategory('Packaging & Paper')" data-cat="Packaging & Paper" class="cat-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition whitespace-nowrap cursor-pointer">
+                        Packaging &amp; Paper
+                    </button>
+                    <button onclick="filterCategory('Engineering & Tools')" data-cat="Engineering & Tools" class="cat-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition whitespace-nowrap cursor-pointer">
+                        Engineering &amp; Tools
+                    </button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="catalogGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
+                <!-- Rendered via JavaScript -->
+            </div>
+
+            <!-- Empty Search State -->
+            <div id="noProductsMessage" class="hidden py-12 text-center">
+                <p class="text-base font-bold text-navy-900">No matching products found.</p>
+                <p class="text-xs text-slate-500 mt-1">Need a specific product? Send us a quick inquiry or call +91 7620106920.</p>
+                <div class="mt-4 flex justify-center gap-3">
+                    <button onclick="resetCatalog()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg cursor-pointer">Show All Products</button>
+                    <button onclick="openInquiryModal('Custom Product Inquiry', 'Custom')" class="px-4 py-2 bg-trade-500 hover:bg-trade-600 text-white text-xs font-bold rounded-lg cursor-pointer">Ask For This Product</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 5. SIMPLE 3-STEP TRADE GUIDE & WHY START WITH SHIPPINGHUB.COM ==================== -->
+    <section id="how-it-works" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+            <span class="text-xs font-bold uppercase tracking-wider text-trade-600">Easy For Beginners</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mt-1">How Import &amp; Export Works on ShippingHub.com</h2>
+            <p class="text-sm text-slate-600 mt-2">No complicated paperwork headaches. Follow three straightforward steps to source or export with confidence.</p>
+        </div>
+
+        <!-- 3 Simple Steps -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs relative">
+                <div class="w-10 h-10 rounded-xl bg-trade-500 text-white font-extrabold flex items-center justify-center text-base mb-4">1</div>
+                <h3 class="text-lg font-bold text-navy-900">Browse &amp; Select Products</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Explore verified products across Agro, Textiles, Handicrafts, Packaging, and Tools—or tell us what item you want to source.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs relative">
+                <div class="w-10 h-10 rounded-xl bg-navy-900 text-white font-extrabold flex items-center justify-center text-base mb-4">2</div>
+                <h3 class="text-lg font-bold text-navy-900">Request a Quote / Sample</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Click <strong>"Get Best Price"</strong> or message us on WhatsApp at <strong>+91 7620106920</strong>. Order a small sample first to verify product quality.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs relative">
+                <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white font-extrabold flex items-center justify-center text-base mb-4">3</div>
+                <h3 class="text-lg font-bold text-navy-900">Easy Shipping &amp; Delivery</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Once you confirm your order, we assist with export packaging, customs documentation, and reliable air or sea freight delivery.
+                </p>
+            </div>
+        </div>
+
+        <!-- Why Start With ShippingHub.com Highlights -->
+        <div class="bg-navy-900 text-white rounded-2xl p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 text-trade-500 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-boxes-stacked text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-base">Low MOQ Support</h4>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">Start small without huge upfront inventory investments—ideal for new importers and retailers.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-box-open text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-base">Sample Orders Available</h4>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">Inspect quality, finish, and packaging in hand before committing to a bulk shipment.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 text-amber-300 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-file-shield text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-base">Documentation &amp; Shipping Help</h4>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">Step-by-step guidance on invoices, packing lists, customs clearance, and door-to-port delivery.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. CLEAN FOOTER ==================== -->
+    <footer id="contact" class="bg-navy-950 text-slate-300 pt-12 pb-8 mt-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-navy-800">
+                
+                <!-- Brand & Ganpati Logo -->
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-navy-900 border border-amber-400/60 flex items-center justify-center shrink-0">
+                            <svg viewBox="0 0 64 64" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ShippingHub Ganpati Emblem">
+                                <defs>
+                                    <linearGradient id="ganpatiGoldFooter" x1="12" y1="8" x2="52" y2="56" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#FDE047"/>
+                                        <stop offset="50%" stop-color="#FF8A00"/>
+                                        <stop offset="100%" stop-color="#EA580C"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="32" cy="32" r="28" stroke="url(#ganpatiGoldFooter)" stroke-width="1.5" stroke-dasharray="2.5 2.5" opacity="0.7"/>
+                                <path d="M32 6L35 10.5H29L32 6Z" fill="#FDE047"/>
+                                <path d="M25 14.5C25 12.2 28 11 32 11C36 11 39 12.2 39 14.5H25Z" fill="url(#ganpatiGoldFooter)"/>
+                                <path d="M22.5 18.5C22.5 16.3 26.5 15.2 32 15.2C37.5 15.2 41.5 16.3 41.5 18.5H22.5Z" fill="url(#ganpatiGoldFooter)"/>
+                                <path d="M21 21C14.5 20.5 11.5 25.5 13 31.5C14.2 36.2 18.2 37.5 21.5 35.5" stroke="url(#ganpatiGoldFooter)" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M43 21C49.5 20.5 52.5 25.5 51 31.5C49.8 36.2 45.8 37.5 42.5 35.5" stroke="url(#ganpatiGoldFooter)" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M23 21.5C26 19.5 38 19.5 41 21.5" stroke="url(#ganpatiGoldFooter)" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M30.2 21.5V25.5C30.2 26.5 33.8 26.5 33.8 25.5V21.5" stroke="#FDE047" stroke-width="1.5" stroke-linecap="round"/>
+                                <circle cx="32" cy="24" r="1.2" fill="#EF4444"/>
+                                <path d="M25.5 27.5C26.8 26.4 28.5 26.4 29.5 27.5" stroke="#FDE047" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M34.5 27.5C35.5 26.4 37.2 26.4 38.5 27.5" stroke="#FDE047" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M32 28.5C32 35.5 31.5 42.5 26.5 46C23.5 48.2 19.5 47 19.2 43.8C19 41.5 21.2 40.2 23 41.2" stroke="url(#ganpatiGoldFooter)" stroke-width="3.6" stroke-linecap="round"/>
+                                <path d="M26 34.5C24.5 35.5 23.5 35.5 22.8 34.8" stroke="#FEF08A" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M37.5 34.5C39.8 36.2 41.8 36 42.8 34.2" stroke="#FEF08A" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M22 53C26 51 38 51 42 53C38 55.5 26 55.5 22 53Z" fill="url(#ganpatiGoldFooter)" opacity="0.85"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xl font-extrabold text-white">ShippingHub<span class="text-trade-500">.com</span></span>
+                            <p class="text-[11px] text-slate-400">Import &amp; Export Trade Portal</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+                        Helping businesses and first-time buyers source quality products smoothly with honest pricing, sample support, and reliable shipping.
+                    </p>
+                </div>
+
+                <!-- Quick Navigation -->
+                <div>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Quick Links</h3>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#home" class="hover:text-trade-500 transition">Home</a></li>
+                        <li><a href="#products" class="hover:text-trade-500 transition">Browse Products</a></li>
+                        <li><a href="#send-inquiry" class="hover:text-trade-500 transition">Send Buy Requirement</a></li>
+                        <li><a href="#how-it-works" class="hover:text-trade-500 transition">How Import &amp; Export Works</a></li>
+                    </ul>
+                </div>
+
+                <!-- Direct Owner Contact -->
+                <div>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Direct Owner Contact</h3>
+                    <p class="text-xs text-slate-400 mb-3">Have questions about minimum orders, pricing, or shipping? Reach out directly:</p>
+                    <div class="space-y-2.5">
+                        <a href="tel:+917620106920" class="flex items-center gap-2 text-sm font-bold text-white hover:text-trade-500 transition">
+                            <i class="fa-solid fa-phone text-trade-500"></i>
+                            <span>+91 7620106920</span>
+                        </a>
+                        <a href="https://wa.me/917620106920?text=Hello%20ShippingHub.com,%20I%20have%20an%20import/export%20inquiry." target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>Message on WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+                <p>© 2026 ShippingHub.com. All rights reserved.</p>
+                <p>Simple Import &amp; Export Business Portal</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== 7. SIMPLE PRODUCT INQUIRY MODAL ==================== -->
+    <div id="inquiryModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-navy-950/70 backdrop-blur-xs p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden animate-fade-in">
+            <div class="bg-navy-900 text-white px-5 py-4 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-trade-500">Quick Quote Request</span>
+                    <h3 class="text-base font-extrabold">Get Best Price &amp; Sample Info</h3>
+                </div>
+                <button onclick="closeInquiryModal()" class="w-8 h-8 rounded-lg bg-navy-800 hover:bg-trade-500 text-white flex items-center justify-center transition cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form onsubmit="submitModalInquiry(event)" class="p-5 space-y-3.5">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Selected Product *</label>
+                    <input type="text" id="modalProduct" required class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl font-semibold text-navy-900 focus:outline-none focus:border-trade-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Quantity Needed *</label>
+                        <input type="text" id="modalQty" required placeholder="e.g., 100 Units" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-trade-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Order Type</label>
+                        <select id="modalOrderType" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl bg-white focus:outline-none focus:border-trade-500">
+                            <option value="Bulk Order">Bulk Order</option>
+                            <option value="Sample Order">Sample Order First</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Destination City / Country *</label>
+                    <input type="text" id="modalLocation" required placeholder="e.g., Pune, Dubai, Toronto" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-trade-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Your Phone / WhatsApp or Email *</label>
+                    <input type="text" id="modalUserContact" required placeholder="e.g., +91 98XXXXXXXX" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:border-trade-500">
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-trade-500 hover:bg-trade-600 text-white font-bold text-sm rounded-xl shadow-sm transition cursor-pointer">
+                    Send Inquiry Now
+                </button>
+
+                <!-- Direct Call & WhatsApp Options inside Modal -->
+                <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 text-xs">
+                    <a href="tel:+917620106920" class="flex-1 py-2 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-navy-900 font-bold text-center transition">
+                        <i class="fa-solid fa-phone text-trade-500 mr-1"></i> Call +91 7620106920
+                    </a>
+                    <a href="https://wa.me/917620106920?text=Hello%20ShippingHub.com,%20I%20want%20the%20best%20price%20for%20a%20product." target="_blank" rel="noopener" class="flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold text-center transition">
+                        <i class="fa-brands fa-whatsapp text-emerald-600 mr-1"></i> WhatsApp Us
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div id="toastBox" class="fixed bottom-5 right-5 z-50 max-w-sm w-full px-4 sm:px-0 pointer-events-none"></div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        let selectedCategory = 'All';
+        let currentSearchTerm = '';
+
+        // Beginner-friendly product catalog with low MOQs and clear INR/USD pricing
+        const catalogItems = [
+            {
+                id: 1,
+                name: '1121 Golden Sella Basmati Rice (Export Grade)',
+                category: 'Agro & Spices',
+                unit: 'kg',
+                moq: '100 kg (4 Bags)',
+                origin: 'Karnal, India',
+                image: 'https://placehold.co/400x260/0F2942/FFFFFF?text=Basmati+Rice'
+            },
+            {
+    id: 2,
+    name: 'Fresh Red Onions',
+    category: 'Agro & Spices',
+    unit: 'kg',
+    moq: 'Contact for Details',
+    image: 'https://placehold.co/400x260/B91C1C/FFFFFF?text=Fresh+Onions'
+},
+{
+    id: 9,
+    name: 'Fresh Potatoes',
+    category: 'Agro & Spices',
+    unit: 'kg',
+    moq: 'Contact for Details',
+    image: 'https://placehold.co/400x260/92400E/FFFFFF?text=Fresh+Potatoes'
+},
+            {
+                id: 4,
+                name: 'Handwoven Cotton Terry Bath Towels (Export Pack)',
+                category: 'Textiles & Garments',
+                unit: 'piece',
+                moq: '100 Pieces',
+                origin: 'Solapur, India',
+                image: 'https://placehold.co/400x260/163A5F/FFFFFF?text=Cotton+Towels'
+            },
+            
+            {
+                id: 7,
+                name: '3-Ply & 5-Ply Corrugated Export Shipping Boxes',
+                category: 'Packaging & Paper',
+                unit: 'box',
+                moq: '250 Boxes',
+                origin: 'Pune, India',
+                image: 'https://placehold.co/400x260/475569/FFFFFF?text=Corrugated+Boxes'
+            },
+            
+        ];
+
+        // Render product cards
+        function renderCatalog() {
+            const grid = document.getElementById('catalogGrid');
+            const emptyMsg = document.getElementById('noProductsMessage');
+
+            const filtered = catalogItems.filter(item => {
+                const matchCat = selectedCategory === 'All' || item.category === selectedCategory;
+                const q = currentSearchTerm.toLowerCase().trim();
+                const matchText = !q ||
+                    item.name.toLowerCase().includes(q) ||
+                    item.category.toLowerCase().includes(q);
+                return matchCat && matchText;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyMsg.classList.remove('hidden');
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+            grid.innerHTML = filtered.map(item => `
+                <div class="bg-white rounded-xl border border-slate-200 hover:border-trade-500 shadow-xs hover:shadow-md transition flex flex-col justify-between overflow-hidden group">
+                    <div>
+                        <div class="h-40 bg-slate-100 overflow-hidden relative">
+                            <img 
+                                src="${item.image}" 
+                                alt="${item.name}" 
+                                onerror="this.src='https://placehold.co/400x260/0F2942/FFFFFF?text=ShippingHub.com+Product'"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            >
+                            <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-md bg-navy-900/90 text-white text-[10px] font-semibold">
+                                ${item.category}
+                            </span>
+                        </div>
+
+                        <div class="p-4">
+                            <h3 class="font-bold text-sm text-navy-900 leading-snug line-clamp-2 min-h-[2.5rem]">
+                                ${item.name}
+                            </h3>
+
+                            
+                                <div class="text-xs text-slate-600 mt-1">
+                                    Min. Order (MOQ): <strong class="text-slate-800">${item.moq}</strong>
+                                </div>
+                            <button 
+                                onclick="openInquiryModal('${item.name.replace(/'/g, "\\'")}', '${item.category}')"
+                                class="w-full mt-4 py-2.5 rounded-xl bg-trade-500 hover:bg-trade-600 text-white text-xs font-bold shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer"
+                            >
+                                <span>Get Price</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter by category pill
+        function filterCategory(category) {
+            selectedCategory = category;
+            document.querySelectorAll('.cat-pill').forEach(btn => {
+                if (btn.dataset.cat === category) {
+                    btn.classList.remove('bg-slate-100', 'text-slate-700');
+                    btn.classList.add('bg-navy-900', 'text-white');
+                } else {
+                    btn.classList.remove('bg-navy-900', 'text-white');
+                    btn.classList.add('bg-slate-100', 'text-slate-700');
+                }
+            });
+            renderCatalog();
+        }
+
+        // Search handler
+        function handleSearch(scrollToCatalog = false) {
+            currentSearchTerm = document.getElementById('productSearchInput').value;
+            renderCatalog();
+            if (scrollToCatalog) {
+                document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function resetCatalog() {
+            currentSearchTerm = '';
+            document.getElementById('productSearchInput').value = '';
+            filterCategory('All');
+        }
+
+        // Hero Quick Inquiry Form submission
+        function handleHeroFormSubmit(e) {
+            e.preventDefault();
+            const product = document.getElementById('heroProduct').value;
+            const qty = document.getElementById('heroQuantity').value;
+            e.target.reset();
+            showToast(`Thank you! Your inquiry for "${product}" (${qty}) has been received. We will contact you shortly or call +91 7620106920.`);
+        }
+
+        // Inquiry Modal controls
+        function openInquiryModal(productName) {
+            document.getElementById('modalProduct').value = productName;
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function submitModalInquiry(e) {
+            e.preventDefault();
+            const product = document.getElementById('modalProduct').value;
+            closeInquiryModal();
+            e.target.reset();
+            showToast(`Quote request sent for "${product}"! Our team will reach out soon.`);
+        }
+
+        // Friendly Toast Notification
+        function showToast(msg) {
+            const box = document.getElementById('toastBox');
+            box.innerHTML = `
+                <div class="bg-navy-900 text-white px-4 py-3.5 rounded-xl shadow-xl border-l-4 border-emerald-400 flex items-start gap-3 text-xs font-medium pointer-events-auto animate-fade-in">
+                    <i class="fa-solid fa-circle-check text-emerald-400 text-base mt-0.5 shrink-0"></i>
+                    <span class="leading-relaxed">${msg}</span>
+                </div>
+            `;
+            setTimeout(() => { box.innerHTML = ''; }, 4500);
+        }
+
+        window.addEventListener('DOMContentLoaded', renderCatalog);
+    </script>
+</body>
+</html>
